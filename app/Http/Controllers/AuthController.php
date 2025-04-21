@@ -17,4 +17,22 @@ class AuthController extends Controller
     {
         return view('auth.register');
     }
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended('/dashboard');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
+    }
 }

@@ -7,18 +7,25 @@ use Illuminate\Http\Request;  // Jika Anda memerlukan Request di controller
 
 class PostController extends Controller
 {
+    // In your PostController
+
     public function index()
     {
-        // Ambil semua postingan dari database
-        $posts = Post::all();
+        $posts = Post::all();  // Mengambil semua data post
 
-        // Debugging untuk memastikan bahwa data posts ada
         if ($posts->isEmpty()) {
-            dd('Tidak ada data postingan');
+            // Jika tidak ada post, log pesan
+            \Log::info('Tidak ada post.');
         }
 
-        // Kirim data ke view
-        return view('post.index', compact('posts'));
+        return view('post.index', compact('posts'));  // Mengirimkan $posts ke view
+    }
+
+
+    public function showPosts()
+    {
+        $posts = Post::all();  // Mengambil semua post
+        return view('post', compact('posts'));  // Kirim ke view
     }
 
 }

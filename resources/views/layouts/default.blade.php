@@ -1,31 +1,34 @@
-{{!-- This is the base layout for your project, and will be used on every page. --}}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    {{!— Required meta tags --}}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{title}} - Pintereso Bootstrap Template</title>
-    <script type="text/javascript"> (function() { var css = document.createElement('link'); css.href = 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })(); </script>
-    <link rel="stylesheet" href="{{root}}assets/css/app.css">
-    <link rel="stylesheet" href="{{root}}assets/css/theme.css">
+    <title>@yield('title') - PictPocket</title> <!-- Menggunakan Blade untuk judul dinamis -->
+
+    <!-- Menggunakan CDN untuk FontAwesome -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Menggunakan fungsi asset() untuk referensi file CSS di Laravel -->
+    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/theme.css') }}">
 
 </head>
 
 <body>
-    {{!-- Navigation and Footer are in partials folder. The body represents the content pages folder. --}}
+    {{-- Navigation dan Footer ada di folder partials. Body adalah konten halaman. --}}
 
-    {{> navigation}}
+    @include('partials.navigation') <!-- Memastikan file navigation.blade.php ada di resources/views/partials -->
+
 
     <main role="main">
-
-    {{> body}}
-
+        <!-- Bagian ini akan diisi dengan konten dari masing-masing view -->
+        @yield('content') <!-- Bagian ini akan diisi dengan konten dinamis dari halaman yang menggunakan layout ini -->
     </main>
 
-    {{> footer}}
+    <!-- Footer juga disertakan menggunakan Blade -->
+    @include('partials.footer') <!-- Memastikan file footer.blade.php ada di resources/views/partials -->
 
 </body>
 

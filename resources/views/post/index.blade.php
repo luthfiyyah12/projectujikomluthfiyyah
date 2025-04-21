@@ -1,21 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Post Index</title>
-</head>
-<body>
+<!-- posts/index.blade.php -->
+@extends('layouts.default')
 
-    <h1>All Posts</h1>
+@section('content')
+    <div class="container">
 
-    @if ($posts->isEmpty())
-        <p>No posts available.</p>
-    @else
-        <ul>
-            @foreach ($posts as $post)
-                <li>{{ $post->title }}</li> <!-- Menampilkan judul dari setiap postingan -->
-            @endforeach
-        </ul>
-    @endif
+        <!-- Menggunakan $posts di sini -->
+        @forelse($posts as $post)
+            <div class="post">
+                <h3>{{ $post->title }}</h3>
+                <p>{{ $post->content }}</p>
+            </div>
+        @empty
+        @endforelse
 
-</body>
-</html>
+    </div>
+@endsection

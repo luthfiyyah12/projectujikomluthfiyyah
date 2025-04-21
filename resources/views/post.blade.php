@@ -2,6 +2,19 @@
 
 @section('content')
     <div class="container">
+        <h2>Posts</h2>
+
+        <!-- Perbaikan: Gunakan $posts untuk iterasi -->
+        @forelse($posts as $post)
+        @include('components.card-post', ['post' => $post])
+            <div class="post">
+                <h3>{{ $post->title }}</h3>
+                <p>{{ $post->content }}</p>
+            </div>
+        @empty
+            <p>No posts available.</p>
+        @endforelse
+
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <article class="card mb-4">
@@ -30,21 +43,13 @@
         <div class="row">
             <h5 class="font-weight-bold">More like this</h5>
             <div class="card-columns">
-                @foreach($posts as $post)
-                    <div class="card card-pin">
-                        <img class="card-img" src="{{ $post->image_url ?? 'gambar_default.jpg' }}" alt="Gambar Card">
-                        <div class="overlay">
-                            <h2 class="card-title title">{{ $post->title ?? 'Judul Tidak Tersedia' }}</h2>
-                            <div class="more">
-                                <a href="{{ route('post.show', $post->id) }}">
-                                    <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Selengkapnya
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Perbaikan: Menggunakan $posts untuk iterasi -->
+                @forelse($posts as $post)
+                    <!-- Menampilkan data postingan -->
+                    <div>{{ $post->title }}</div>
                 @empty
-                    <p>Belum ada postingan yang bisa ditampilkan.</p>
-                @endforeach
+                    <p>No posts available.</p>
+                @endforelse
             </div>
         </div>
     </div>
@@ -71,7 +76,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4); /* You can adjust this value for better visibility */
+            background: rgba(0, 0, 0, 0.4);
             color: white;
             display: flex;
             justify-content: center;

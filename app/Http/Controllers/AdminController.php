@@ -1,9 +1,7 @@
 <?php
 
-// app/Http/Controllers/AdminController.php
 namespace App\Http\Controllers;
 
-use App\Models\Image;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -13,10 +11,14 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
+    public function dashboard()
+    {
+        return view('admin.dashboard');
+    }
+
     public function images()
     {
-        $images = Image::all();
-        return view('admin.images.index', compact('images'));
+        return view('admin.images.index');
     }
 
     public function create()
@@ -26,19 +28,6 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-
-        $imagePath = $request->file('image')->store('images', 'public');
-
-        Image::create([
-            'title' => $request->title,
-            'image_name' => $imagePath,
-        ]);
-
-        return redirect()->route('admin.images')->with('success', 'Image uploaded successfully.');
+        // Proses upload/store image
     }
 }
-

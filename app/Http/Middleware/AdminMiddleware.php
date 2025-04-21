@@ -9,9 +9,11 @@ class AdminMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user() && auth()->user()->is_admin) {
-            return $next($request);
+        // Pastikan admin login atau user memiliki akses admin
+        if (!auth()->user() || auth()->user()->role !== 'admin') {
+            return redirect('/');  // atau halaman lain yang diinginkan jika bukan admin
         }
-        return redirect('/');
+
+        return $next($request);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+// app/Models/Post.php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,7 +11,8 @@ class Post extends Model
 {
     use HasFactory;
 
-    // Nama tabel (jika tabel tidak mengikuti konvensi penamaan)
-    // protected $table = 'posts';
+    // Pastikan kamu mendefinisikan field yang dapat diisi (fillable)
+    protected $fillable = ['title', 'content'];
 }
+
 
